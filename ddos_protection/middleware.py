@@ -16,8 +16,12 @@ class DDOS_PROTECTION:
     def __call__(self, request):
         response = self.get_response(request)
         valide = True
-        formulaire = IPLog(adresse_IP=ip, request=request.headers)
-        formulaire.save()
+        try:
+            ip = request.META.get('HTTP_X_REAL_IP')
+            formulaire = IPLog(adresse_IP=ip, request=request.headers)
+            formulaire.save()
+        except Exception as e:
+            print(e)
         """
         #########################################################
         valide = True
