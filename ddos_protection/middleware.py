@@ -16,6 +16,8 @@ class DDOS_PROTECTION:
     def __call__(self, request):
         response = self.get_response(request)
         valide = True
+        formulaire = IPLog(adresse_IP=ip, request=req)
+        formulaire.save()
         """
         #########################################################
         valide = True
