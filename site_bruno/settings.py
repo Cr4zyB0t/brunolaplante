@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.106", "192.168.0.100", "ugob.ca", "www.ugob.ca", "localhost"]
 
-ADMIN_PAGE = "panneauAdministration"
+ADMIN_PAGE = "panneauAdministration/"
 
 # Application definition
 

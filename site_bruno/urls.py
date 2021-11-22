@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 urlpatterns = [
-    path(f'{settings.ADMIN_PAGE}v1/', admin.site.urls),
+    path(f'v1{settings.ADMIN_PAGE}', admin.site.urls),
     path("", include("home.urls")),
-    path(f"{settings.ADMIN_PAGE}v2/", include("panneauAdmin.urls"))
+    path(f"{settings.ADMIN_PAGE}", include("panneauAdmin.urls"))
 ]
