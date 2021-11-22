@@ -116,7 +116,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -125,10 +125,19 @@ USE_TZ = True
 LOGIN_URL = "/connexion/"
 LOGIN_REDIRECT_URL = "/"
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
+
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+    ]
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
+else:
+    STATIC_ROOT = "/var/www/html/static"
+    MEDIA_ROOT = "/var/www/html/static/img"
+
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
+
 MEDIA_URL = 'img/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
