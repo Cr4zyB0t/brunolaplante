@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 import sys, inspect
 from django.forms import ModelForm
 sys.path.append("../")
-import home, todo
+import home
 from home.models import *
 import ddos_protection
 from ddos_protection.models import *
