@@ -1,0 +1,21 @@
+{% extends 'panneauAdmin/base.html' %}
+{% block body %}
+    <h1>Panneau d'administration du site web</h1>
+    <div class="cards">
+        
+        <div class="card">
+            <div class="card-title">
+                <h2 class="titre-card">Connexion</h2>
+            </div>
+            
+            <div class="card-content">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

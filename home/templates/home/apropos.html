@@ -1,0 +1,10 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+    <section id="apropos" class="apropos">
+        {% for article in articles %}
+            <h1 id="qui_suis-je" class="apropos">{{article.titre}}</h1>
+            <p id="description_apropos" class="apropos">{{article.description}}</p>
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+<aside class="images-accueil">
+    {% for img in images %}
+    <img class="image-accueil" src="/static{{img.image.url}}" alt="image d'oiseau">
+    {% endfor %}
+</aside>
+{% endblock %}

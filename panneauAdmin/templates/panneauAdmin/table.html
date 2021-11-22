@@ -1,0 +1,84 @@
+{% extends 'panneauAdmin/base_connecte.html' %}
+{% load static %}
+
+{% block body %}
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+    </script>
+
+    <script async>
+
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+    </script>
+    <div class="content">
+
+        <a href="../tables">Retour</a>
+        <div class="cards">
+            {% if form != None %}
+                <div class="card">
+                    <div class="card-title">
+                        <h2 class="titre-card">Ajout de {{table.titre}}</h2>
+                    </div>
+                    
+                    <div class="card-content">
+                        <form class="form-table-add" enctype=multipart/form-data method="POST">
+                            {% csrf_token %}
+                            {{form}}
+                            <button type="submit">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if form_supprimer != None %}
+                <div class="card">
+                    <div class="card-title suppression">
+                        <h2 class="titre-card">Suppression</h2>
+                    </div>
+                    
+                    <div class="card-content">
+                        <form class="form-table-add" method="POST">
+                            {% csrf_token %}
+                            {{form_supprimer}}
+                            <button class="suppression" type="submit">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="card large">
+                <div class="card-title large-title">
+                    <h2 class="titre-card">{{table.titre}}</h2>
+                    
+                </div>
+                <div class="card-content large-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                {% for t in table.colonnes %}
+                                    <th>{{t}}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ligne in table.lignes %}
+                                <tr class="clickable-row" data-href='{{table.titre}}/{{ligne.0}}' style="cursor: pointer; ">
+                                    {% for champ in ligne %}
+                                        <td>{{champ}}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

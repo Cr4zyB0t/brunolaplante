@@ -1,0 +1,222 @@
+{% extends 'panneauAdmin/base_connecte.html' %}
+{% block body %}
+    <div class="content">
+        <div class="cards">
+            <div class="card mini">
+                <div id="stockage" class="card-title mini-title">
+                    <img src="/static/img/db_icon.svg" alt="Icone base de données">
+                    <h2 class="titre-card">Stockage</h2>
+                    
+                </div>
+                <div class="card-content mini-content">
+                    <p id="valeur-disque" class="mini-paragraphe">Espace utilisé : {{espace_utilise}}/{{espace_total}} GO<br>
+                    Espace restant : {{espace_restant}} GO</p>
+                </div>
+            </div>
+
+
+
+            <div class="card mini">
+                <div id="ram" class="card-title mini-title">
+                    <img src="/static/img/ram.svg" alt="Icone de ram">
+                    <h2 class="titre-card">Mémoire RAM</h2>
+                    
+                </div>
+                <div class="card-content mini-content">
+                    <p id="valeur-ram" class="mini-paragraphe">RAM utilisé : {{ram_utilise}}/{{ram_total}} GO<br>
+                    RAM restant : {{ram_restant}} GO</p>
+                </div>
+            </div>
+
+            <div class="card mini">
+                <div id="cpu" class="card-title mini-title">
+                    <img src="/static/img/cpu.svg" alt="Icone de cpu">
+                    <h2 class="titre-card">Pourcentage CPU</h2>
+                    
+                </div>
+                <div class="card-content mini-content">
+                    <p id="valeur-cpu" class="mini-paragraphe">CPU utilisé : {{cpu_utilise}}%</p><br>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div id="menu-etat-server" class="card-title">
+                    <h2 class="titre-card">Commande serveur</h2>
+                </div>
+                
+                <div class="card-content">
+                    <div class="fonction_server">
+                        <button id="btn_update" class="btn_server" type="button">Mettre à jour</button>
+                        <button id="btn_reboot" class="btn_server" type="button">Redémarrer</button>
+                        <button id="btn_clear" class="btn_server" type="button">Nettoyer la console</button>
+                        <p id="console_output"></p>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+    <script async>
+        window.addEventListener("load", () => {
+            let console_output = document.getElementById("console_output");
+            if (location.host.includes("localhost")){
+                url='http://' + location.host + `/{{page_admin}}api/console`;
+            }
+            else
+            {
+                url='https://' + location.host + `/{{page_admin}}api/console`;
+            }
+            
+            function sleep(milliseconds) {
+                var start = new Date().getTime();
+                for (var i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds){
+                    break;
+                    }
+                }
+            }
+
+            async function refreshConsole(){
+                const Http = new XMLHttpRequest();
+                Http.open("GET", url, true);
+                Http.onload = function (e) {
+                    if (Http.readyState === 4) {
+                        if (Http.status === 200) {
+                            objet = JSON.parse(Http.responseText)
+
+                            if (console_output != ""){
+                                console_output.innerHTML = objet["consoleServeur"];
+                            } 
+                            
+                            
+                        } else {
+                        console.error(Http.statusText);
+
+                        }
+                    }
+                };
+                Http.send();
+            
+            }
+                
+            setInterval(refreshConsole,1000);
+        });
+    </script>
+    <script async>
+        window.addEventListener("load", () => {
+            let btn_update = document.getElementById("btn_update");
+            let btn_reboot = document.getElementById("btn_reboot");
+            let btn_clear = document.getElementById("btn_clear");
+
+            const Http = new XMLHttpRequest();
+
+            async function callAPI(fonction){
+                let url = "";
+                
+                if (location.host.includes("localhost")){
+                    url='http://' + location.host + `/{{page_admin}}api/${fonction}`;
+                }
+                else
+                {
+                    url='https://' + location.host + `/{{page_admin}}api/${fonction}`;
+                }
+
+                Http.open("GET", url, true);
+                Http.onload = function (e) {
+                    if (Http.readyState === 4) {
+                        if (Http.status === 200) {
+                            objet = JSON.parse(Http.responseText)
+                            
+                        } else {
+                        console.error(Http.statusText);
+
+                        }
+                    }
+                };
+                Http.send();
+            }
+
+            btn_update.addEventListener("click", () => {callAPI("update")} );
+            btn_reboot.addEventListener("click", () => {callAPI("reboot")} );
+            btn_clear.addEventListener("click", () => {callAPI("clear")} );
+        });
+    </script>
+    <script async>
+
+        
+        window.addEventListener("load", () => {
+            let cpu = document.getElementById("valeur-cpu");
+            let ram = document.getElementById("valeur-ram");
+            let disque = document.getElementById("valeur-disque");
+            
+            function sleep(milliseconds) {
+                var start = new Date().getTime();
+                for (var i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds){
+                    break;
+                    }
+                }
+            }
+
+            async function refreshCPU(){
+                
+                  try {
+                        const Http = new XMLHttpRequest();
+                        let url = "";
+                        let etat_serveur = "";
+                        let menu_etat = document.getElementById("menu-etat-server");
+
+                        if (location.host.includes("localhost")){
+                            url='http://' + location.host + "/{{page_admin}}api/all";
+                        }
+                        else
+                        {
+                            url='https://' + location.host + "/{{page_admin}}api/all";
+                        }
+
+
+                        Http.open("GET", url, true);
+                        Http.onload = function (e) {
+                            if (Http.readyState === 4) {
+                                if (Http.status === 200) {
+                                    objet = JSON.parse(Http.responseText)
+                                    
+                                    disque.innerHTML = `Espace utilisé : ${objet["disqueUtilise"]}/${objet["disqueTotal"]} GO<br>
+                    Espace restant : ${objet["disqueRestant"]} GO`;
+                                    
+                                    ram.innerHTML = `RAM utilisé : ${objet["ramUtilise"]}/${objet["ramTotal"]} GO<br>
+                    RAM restant : ${objet["ramRestant"]} GO`;
+
+                                    cpu.innerText = "CPU utilisé : " + objet["cpu"] + "%"; 
+                                    etat_serveur = objet["etat_serveur"];
+
+                                    if (etat_serveur == "maj"){
+                                        menu_etat.style.background = "linear-gradient(60deg, #ffa726, #fb8c00)";
+                                    }
+                                    else{
+                                        menu_etat.style.background = "linear-gradient(60deg, #14be14, #089404)";
+                                    }
+
+                                    refreshCPU();
+                                } else {
+                                console.error(Http.statusText);
+                                    menu_etat.style.background = "linear-gradient(60deg, #ff3131, #c50606)";
+                                    refreshCPU();
+                                }
+                            }
+                        };
+                        Http.onerror = function(e) {
+                            //sleep(2000);
+                            refreshCPU();
+                        }
+                        Http.send();       
+                    } catch (error) {
+                        refreshCPU();
+                    }
+            }
+            refreshCPU();
+        });
+        
+    </script>
+{% endblock %}

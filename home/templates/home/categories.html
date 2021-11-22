@@ -1,0 +1,16 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+    <div class="boutons-categories">
+    {% for cat in categories %}
+        <a class="button-categorie" href="{{cat}}">{{cat}}</a>
+    {% endfor %}
+    </div>
+
+    <aside class="images-cliches">
+    
+    {% for photo in photos %}
+        <img class="image-cliche" src="/static{{photo.image.url}}" alt="{{photo.nom}}">
+    {% endfor %}
+    </aside>
+{% endblock %}

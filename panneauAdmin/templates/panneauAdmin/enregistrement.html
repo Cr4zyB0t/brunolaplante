@@ -1,0 +1,25 @@
+{% extends 'panneauAdmin/base_connecte.html' %}
+
+{% block body %}
+<div class="content">
+
+    <a href="../{{nom_table}}">Retour</a>
+    <div class="cards">
+    {% if form != None%}
+        <div class="card">
+            <div class="card-title">
+                <h2 class="titre-card">Modification</h2>
+            </div>
+            
+            <div class="card-content">
+                <form class="form-table-add" method="POST" enctype=multipart/form-data>
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

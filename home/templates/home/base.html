@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruno Laplante</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <nav>
+        <p class="nom">BRUNO LAPLANTE</p>
+        <p>Photographe</p>
+        <a class="nav" href="/">Accueil</a>
+        <a class="nav" href="/cliches/">Mes derniers clichés</a>
+        <a class="nav" href="/categories/">Catégories de photos</a>
+        <a class="nav" href="/apropos/">À propos</a>
+        {% if user.is_superuser %}
+            <a class="nav" href="/panneauAdministrationv2/">Administration</a>
+        {% endif %}
+        <p id="reseaux-sociaux">Rejoignez moi sur facebook</p>
+        <a href="https://www.facebook.com/brunolaplantephotographe/" target="_blank""><img id="logo-facebook" src="{% static 'img/facebook.png' %}" alt="logo facebook"></a>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LJ9PWGKFN"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-2LJ9PWGKFN');
+        </script>
+    </nav>
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,130 @@
+:root{
+    --taille-nav: 14em;
+}
+body{
+    font-family: cursive, Arial, Helvetica, sans-serif;
+    font-size: 1.6em;
+}
+a.nav, button, .button-categorie{
+    text-decoration: none;
+    background-color: #aaacaa;
+    border: 0px;
+    border-radius: 20px;
+    color: black;
+    padding: 0.5em;
+    text-align: center;
+    margin-top: 1em;
+    width: 12em;
+    transition: background-color 0.5s ease;
+}
+a.nav:hover, button:hover{
+    background-color: #535353;
+    color: white;
+}
+nav{
+    position: fixed;
+    width: var(--taille-nav);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+}
+#logo-facebook{
+    width: 3em;
+    margin-top: 1em;
+}
+#reseaux-sociaux{
+    margin-top: 1em;
+    text-align: center;
+}
+.boutons-categories{
+    margin-left: 14em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#apropos{
+    margin-left: var(--taille-nav);
+    text-align: center;
+}
+#qui_suis-je{
+    padding-top: 0.5em;
+    font-size: 2em;
+}
+#description_apropos{
+    margin-top: 1em;
+}
+button{
+    margin: 0.5em;
+    width: 8em;
+    height: 2em;
+    font-size: 1em;
+    font-family: cursive, Arial, Helvetica, sans-serif;
+    box-shadow:
+  0 0px 2.1px rgba(0, 0, 0, 0.048),
+  0 0px 5px rgba(0, 0, 0, 0.069),
+  0 0px 9.4px rgba(0, 0, 0, 0.085),
+  0 0px 16.8px rgba(0, 0, 0, 0.101),
+  0 0px 31.3px rgba(0, 0, 0, 0.122),
+  0 0px 75px rgba(0, 0, 0, 0.17);
+}
+.nom{
+    font-size: 1.5em;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.images-accueil, .images-cliches{
+    position:absolute;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    margin-left: var(--taille-nav);
+}
+.image-accueil, .image-cliche{
+    max-width: 45%;
+    margin: 1em;
+    border-radius: 20px;
+    box-shadow:
+  0 0px 2.1px rgba(0, 0, 0, 0.048),
+  0 0px 5px rgba(0, 0, 0, 0.069),
+  0 0px 9.4px rgba(0, 0, 0, 0.085),
+  0 0px 16.8px rgba(0, 0, 0, 0.101),
+  0 0px 31.3px rgba(0, 0, 0, 0.122),
+  0 0px 75px rgba(0, 0, 0, 0.17);
+}
+.button-categorie{
+    margin: 1em;
+    padding: 0.5em 2em 0.5em 2em;
+    width: auto;
+    box-shadow:
+  0 0px 2.1px rgba(0, 0, 0, 0.048),
+  0 0px 5px rgba(0, 0, 0, 0.069),
+  0 0px 9.4px rgba(0, 0, 0, 0.085),
+  0 0px 16.8px rgba(0, 0, 0, 0.101),
+  0 0px 31.3px rgba(0, 0, 0, 0.122),
+  0 0px 75px rgba(0, 0, 0, 0.17);
+}
+@media only screen and (max-width: 1100px) {
+    @media only screen and (max-width: 340px){
+        a.nav{
+            width: 10em;
+        }
+    }
+    nav{
+        position: relative;
+        width: 100%;
+    }image-accueil_1.jpg
+    .nom{
+        margin-top: 0.5em;
+        font-size: 1.3em;
+    }
+    .images-accueil, .images-cliches, .boutons-categories, #apropos{
+        margin-left: 0;
+    }   
+    .image-accueil, .image-cliche{
+        max-width: 90%;
+    }
+}

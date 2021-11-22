@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panneau d'administration</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+</head>
+<body>
+    
+    <nav>
+        <h1>brunolaplante.ca</h1>
+        
+        {% if selected == 'dashboard' %}
+        <a href="/{{page_admin}}accueil" class="selected">
+            <img src="/static/img/dashboard_black_48dp.svg" alt="Tableau de bord">
+            <p>Tableau de bord</p>
+        </a>
+        {% else %}
+        <a href="/{{page_admin}}accueil/">
+            <img src="/static/img/dashboard_black_48dp.svg" alt="Tableau de bord">
+            <p>Tableau de bord</p>
+        </a>
+        {% endif %}
+
+        {% if selected == 'tables' %}
+        <a href="/{{page_admin}}tables/" class="selected">
+            <img src="/static/img/table_rows_black_48dp.svg" alt="Tableau de bord">
+            <p>Liste des tables</p>
+        </a>
+        {% else %}
+        <a href="/{{page_admin}}tables/">
+            <img src="/static/img/table_rows_black_48dp.svg" alt="Tableau de bord">
+            <p>Liste des tables</p>
+        </a>
+        {% endif %}
+        
+
+        {% if selected == 'utilisateurs' %}
+        <a href="/{{page_admin}}utilisateurs/" class="selected">
+            <img src="/static/img/person_black_48dp.svg" alt="Tableau de bord">
+            <p>Utilisateurs</p>
+        </a>
+        {% else %}
+        <a href="/{{page_admin}}utilisateurs/">
+            <img src="/static/img/person_black_48dp.svg" alt="Tableau de bord">
+            <p>Utilisateurs</p>
+        </a>
+        {% endif %}
+
+        {% if selected == 'serveur' %}
+        <a href="/{{page_admin}}serveur/" class="selected">
+            <img src="/static/img/server_black_48dp.svg" alt="Tableau de bord">
+            <p>Serveur</p>
+        </a>
+        {% else %}
+        <a href="/{{page_admin}}serveur/">
+            <img src="/static/img/server_black_48dp.svg" alt="Tableau de bord">
+            <p>Serveur</p>
+        </a>
+        {% endif %}
+
+        <a href="/">
+            <img src="/static/img/home_black_48dp.svg" alt="Tableau de bord">
+            <p>Site web</p>
+        </a>
+        
+    </nav>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

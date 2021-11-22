@@ -1,0 +1,36 @@
+{% extends 'panneauAdmin/base_connecte.html' %}
+
+{% block body %}
+    <div class="content">
+        <div class="cards">
+            {% for table in tables %}
+                <div class="card large">
+                    <div class="card-title large-title">
+                        <h2 class="titre-card">{{table.titre}}</h2>
+                        
+                    </div>
+                    <div class="card-content large-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    {% for t in table.colonnes %}
+                                        <th>{{t}}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ligne in table.lignes %}
+                                    <tr>
+                                        {% for champ in ligne %}
+                                            <td>{{champ}}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
