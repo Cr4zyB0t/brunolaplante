@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&=_gn81n_0u5e@btllx30=4!uy)285@aiy=h)sji@0ncvr_ba_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 ADMIN_PAGE = "panneauAdministration"
