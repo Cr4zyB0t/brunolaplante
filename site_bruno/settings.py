@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-&=_gn81n_0u5e@btllx30=4!uy)285@aiy=h)sji@0ncvr_ba_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "192.168.0.106", "192.168.0.100", "ugob.ca", "www.ugob.ca", "localhost"]
+
 ADMIN_PAGE = "panneauAdministration"
 
 # Application definition
