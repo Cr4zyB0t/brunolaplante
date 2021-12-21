@@ -23,8 +23,11 @@ class DDOS_PROTECTION:
             ip = request.META.get('HTTP_X_REAL_IP')
             req = request.headers
             #ip = "198.119.191.29"
-            objets = IPLog.objects.filter(adresse_IP=ip).order_by('-date')[:NB_CONNEXION-1]
-
+            try:
+                objets = IPLog.objects.filter(adresse_IP=ip).order_by('-date')[:NB_CONNEXION-1]
+            except:
+                objets = []
+                
             if (request.user.is_superuser or request.user.is_staff) and "api" in request.get_full_path():
                 valide = True
             else:
