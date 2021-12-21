@@ -27,12 +27,12 @@ class DDOS_PROTECTION:
                 objets = IPLog.objects.filter(adresse_IP=ip).order_by('-date')[:NB_CONNEXION-1]
             except:
                 objets = []
-                
+
             if (request.user.is_superuser or request.user.is_staff) and "api" in request.get_full_path():
                 valide = True
             else:
 
-                if objets:
+                if objets and len(objets) >= NB_CONNEXION:
                     debut = objets[len(objets) - 1].date.timestamp()
                 else:
                     debut = 0
