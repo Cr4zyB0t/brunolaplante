@@ -20,7 +20,7 @@ class DDOS_PROTECTION:
         valide = True
         
         try:
-            #ip = request.META.get('HTTP_X_REAL_IP')
+            ip = request.META.get('HTTP_X_REAL_IP')
             req = request.headers
             #ip = "198.119.191.29"
             objets = IPLog.objects.filter(adresse_IP=ip).order_by('-date')[:NB_CONNEXION-1]
